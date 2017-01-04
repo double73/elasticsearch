@@ -21,6 +21,7 @@ package org.elasticsearch.search.aggregations;
 
 import org.elasticsearch.ElasticsearchParseException;
 import org.elasticsearch.common.ParseField;
+import org.elasticsearch.common.ParseFieldMatcher;
 import org.elasticsearch.common.io.stream.StreamInput;
 import org.elasticsearch.common.io.stream.StreamOutput;
 import org.elasticsearch.common.io.stream.Writeable;
@@ -128,7 +129,7 @@ public abstract class Aggregator extends BucketCollector implements Releasable {
             return parseField;
         }
 
-        public static SubAggCollectionMode parse(String value) {
+        public static SubAggCollectionMode parse(String value, ParseFieldMatcher parseFieldMatcher) {
             SubAggCollectionMode[] modes = SubAggCollectionMode.values();
             for (SubAggCollectionMode mode : modes) {
                 if (mode.parseField.match(value)) {
